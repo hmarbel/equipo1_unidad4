@@ -1,0 +1,121 @@
+<!-- Este es un script con todas las funciones adicionales -->
+
+<!-- ¿Por qué no incluir estas funciones en el archivo main.js? -->
+<!-- Por una sencilla razón: Las funciones de main.js son "utilizables" -->
+<!-- hasta que el archivo .php actual se haya cargado -->
+
+<!-- Es decir, supongamos que tenemos que pintar los asientos en controlAutobus.php -->
+<!-- con la función paintAsiento, sin embargo, main.js se cargará después de controlAutobus.php, -->
+<!-- esto hace que php no reconozca la función si se llama en un onload, por ejemplo. -->
+
+<!-- Entonces, la solución es hacer un archivo con las funciones, pero estas -->
+<!-- se invocarán antes del inicio del archivo .php, lo que hace que sean -->
+<!-- "utilizables" en cualquier momento y lugar del archivo. -->
+
+<script type="text/javascript">
+    function paintAsientos(divId, tipo) {
+        let div = document.getElementById(divId);
+        div.innerHTML = "";
+        //let div = $('#' + divId);
+
+        // Pintar asientos de un autobús Hydrus Regular
+        if (tipo == "1") {
+            let table = document.createElement("table");
+            table.style = "border-spacing: 1rem; border-collapsed: collapsed;";
+
+            // La distribución es 5 filas x 10 columnas
+            for (let i = 0; i < 5; i++) {
+                let noAsiento = i + 1;
+                if (noAsiento > 2) {
+                    noAsiento = i;
+                }
+
+                if (i != 2) {
+                    let tr = document.createElement("tr");
+                    for (let j = 0; j < 10; j++) {
+                        let td = document.createElement("td");
+
+                        let asiento = document.createElement("div");
+                        //asiento.className = "asiento";
+                        asiento.innerHTML = noAsiento;
+                        asiento.id = "asiento" + noAsiento;
+                        noAsiento += 4;
+                        asiento.style = 'background-image: url("img/seatA.png"); background-size: 3rem; width: 3rem; height: 3rem; text-align: center; padding-left: 0.65rem; display: flex; align-items: center; justify-content: center;';
+
+                        td.appendChild(asiento);
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                } else {
+                    let tr = document.createElement("tr");
+                    for (let j = 0; j < 10; j++) {
+                        let td = document.createElement("td");
+
+                        let asiento = document.createElement("div");
+                        asiento.style = 'width: 3rem; height: 3rem;';
+
+                        td.appendChild(asiento);
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                }
+            }
+
+            div.appendChild(table);
+        }
+        // Pintar asientos de un autobús Hydrus Galaxy
+        else if (tipo == "2") {
+            let table = document.createElement("table");
+            table.style = "border-spacing: 1rem; border-collapsed: collapsed;";
+
+            // La distribución es 4 filas x 9 columnas
+            for (let i = 0; i < 4; i++) {
+                let noAsiento = i + 1;
+                if (noAsiento > 2) {
+                    noAsiento = i;
+                }
+
+                if (i != 2) {
+                    let tr = document.createElement("tr");
+                    for (let j = 0; j < 9; j++) {
+                        let td = document.createElement("td");
+
+                        let asiento = document.createElement("div");
+                        //asiento.className = "asiento";
+                        asiento.innerHTML = noAsiento;
+                        asiento.id = "asiento" + noAsiento;
+                        noAsiento += 3;
+                        asiento.style = 'background-image: url("img/seatA.png"); background-size: 3rem; width: 3rem; height: 3rem; text-align: center; padding-left: 0.65rem; display: flex; align-items: center; justify-content: center;';
+
+                        td.appendChild(asiento);
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                } else {
+                    let tr = document.createElement("tr");
+                    for (let j = 0; j < 9; j++) {
+                        let td = document.createElement("td");
+
+                        let asiento = document.createElement("div");
+                        asiento.style = 'width: 3rem; height: 3rem;';
+
+                        td.appendChild(asiento);
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                }
+            }
+
+            div.appendChild(table);
+        }
+
+    }
+
+    function sonIguales(pass1, pass2) {
+        if (pass1 == pass2) {
+            return true;
+        }
+
+        return false;
+    }
+</script>
